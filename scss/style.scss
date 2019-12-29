@@ -1,0 +1,65 @@
+@import 'materialize';
+
+
+.header {
+    text-align: center;
+}
+
+input[type=text], input[type=number] {
+    padding: 0 5px !important;
+}
+
+label {
+    margin-top: -3px;
+}
+
+.book-submit-wrap {
+    text-align: right;
+
+    .book-submit {
+        width: 100%;
+        max-width: 13rem;
+    }
+}
+
+
+.centeredToast{
+    left: 0;
+    right: 0;
+}
+
+.display {
+    margin-top: 3rem;
+}
+
+.card {
+
+    hr {
+        margin-top: 1.5rem;
+    }
+
+    &-footer {
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &-close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        transition: all 300ms;
+    
+        &:hover {
+            color: #26a69a;
+        }
+    }
+}
+
+
+
+.book-read-No {
+    @extend .red, .darken-1
+}
