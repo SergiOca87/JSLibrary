@@ -1,8 +1,25 @@
 @import 'materialize';
 
+body {
+    background-color: #f0ead6;
+}
+
+.input-field input[type=search]:focus:not(.browser-default) {
+    background-color: transparent;
+}
 
 .header {
     text-align: center;
+    color: #26a69a;
+}
+
+form {
+    padding: 2rem !important;
+    background-color: #f5f2e8;
+
+    .row:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 input[type=text], input[type=number] {
@@ -30,6 +47,7 @@ label {
 
 .display {
     margin-top: 3rem;
+    min-height: 340px;
 }
 
 .card {
@@ -58,7 +76,17 @@ label {
     }
 }
 
+.display-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    margin-bottom: 2rem;
+}
 
+.hide-book {
+    display: none;
+}
 
 .book-read-No {
     @extend .red, .darken-1

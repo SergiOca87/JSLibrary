@@ -12,27 +12,27 @@
 
     <div class="container">
         <div class="row">
-            <h2 class="header blue-text">JS Library</h2>
+            <h2 class="header">JS Library</h2>
            
         </div>
         <div class="row">
             <form class="col offset-s2 s8 offset-s2">
                 <div class="row">
                     <div class="input-field col m6 s12">
-                        <input type="text" id="book-title" placeholder="Enter the book's title" required="required">
+                        <input type="text" id="book-title"  required="required" class="validate">
                         <label for="book-title">Title</label>
                     </div>
                 
                     <div class="input-field col m6 s12">
-                        <input type="text" id="book-name" placeholder="Enter the Author's name" required="required">
+                        <input type="text" id="book-name" required="required" class="validate">
                         <label for="book-name">Author</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col m6 s12">
-                        <input type="number" id="book-number" placeholder="Enter the number of pages" required="required">
-                        <label for="book-numberS">Number of pages</label>
+                        <input type="number" id="book-number" required="required" class="validate">
+                        <label for="book-number">Number of pages</label>
                     </div>
 
                     <div class="input-field col m6 s12">
@@ -41,7 +41,6 @@
                             <option>Yes</option>
                             <option>No</option>
                         </select>
-                        <label>Read?</label>
                     </div>
                 </div>
 
@@ -55,7 +54,6 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <label for="book-rating">Rating</label>
                     </div>
 
                     <div class="input-field col m6 s12 book-submit-wrap">
@@ -70,12 +68,30 @@
             <hr>
 
             <div class="display">
+                <div class="display-controls">
+                
+                    <div class="input-field">
+                        <i class="material-icons prefix">search</i>
+                        <input id="book_search" type="search" class="validate">
+                        <label for="book_search">Book Search</label>
+                      </div>
+
+
+                    <div>
+                        <select name="book-sort" id="book-sort">
+                            <option selected disabled hidden>Sort By...</option>
+                            <option value="rating">Rating</option>
+                            <option value="asc">Name A-Z</option>
+                            <option value="desc">Name Z-A</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col s12 m6 book-number-${index}">
+                    <div class="col s12 m6 book book-number-${index}">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <i class="small material-icons card-close">close</i>
-                                <span class="card-title">${book.title}</span>
+                                <span class="card-title">El Lobo Estepario</span>
                                 <p><strong>Author</strong>: ${book.author}</p>
                                 <p><strong>Pages</strong>: ${book.numberOfPages}</p>
                                 <hr>

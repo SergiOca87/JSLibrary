@@ -4930,8 +4930,21 @@ input[type=range]::-ms-thumb {
 .keyboard-focused input[type=range]:focus:not(.active)::-ms-thumb {
   box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); }
 
+body {
+  background-color: #f0ead6; }
+
+.input-field input[type=search]:focus:not(.browser-default) {
+  background-color: transparent; }
+
 .header {
-  text-align: center; }
+  text-align: center;
+  color: #26a69a; }
+
+form {
+  padding: 2rem !important;
+  background-color: #f5f2e8; }
+  form .row:last-of-type {
+    margin-bottom: 0; }
 
 input[type=text], input[type=number] {
   padding: 0 5px !important; }
@@ -4950,7 +4963,8 @@ label {
   right: 0; }
 
 .display {
-  margin-top: 3rem; }
+  margin-top: 3rem;
+  min-height: 340px; }
 
 .card hr {
   margin-top: 1.5rem; }
@@ -4969,3 +4983,13 @@ label {
   transition: all 300ms; }
   .card-close:hover {
     color: #26a69a; }
+
+.display-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  margin-bottom: 2rem; }
+
+.hide-book {
+  display: none; }
