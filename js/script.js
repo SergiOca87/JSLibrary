@@ -1,4 +1,4 @@
-//Materialize
+//Materialize Input Fields
 document.addEventListener("DOMContentLoaded", function() {
   var elems = document.querySelectorAll("select");
   var instances = M.FormSelect.init(elems);
@@ -8,25 +8,34 @@ document.addEventListener("DOMContentLoaded", function() {
 //Add a sort method by name and or rating with Array.sort, that's where BookStorage comes in handy
 
 class Library {
-  constructor(bookStorage, bookDisplay, bookSearch) {
+  constructor(bookStorage, bookDisplay, bookSearch, submitBook, sortLibrary) {
     this.bookStorage = bookStorage;
     this.bookDisplay = bookDisplay;
     this.bookSearch = bookSearch;
+    this.submitBook = submitBook;
+    this.sortLibrary = sortLibrary;
 
-    //Delete Books from the Library using Event Delegation
+    //Delete Books from the Library or toggle read or unread status using Event Delegation
     this.bookDisplay.addEventListener("click", this.libraryMethods);
 
     //Search for Books
     this.bookSearch.addEventListener("keyup", this.searchBook);
+
+    //Submit a Book
+    this.submitBook.addEventListener("click", this.createBook);
+
+    //Sort the bookStorage and render with the chosen option and render the new Books in said order
+    this.sortLibrary.addEventListener('change', this.sortStorage);
   }
 
   storeBook = book => this.bookStorage.push(book);
 
-  renderDisplay = (book, index) => {
+  renderBook = (book, index) => {
     const readOrUnread = book.read === "Yes" ? "Read" : "Unread";
 
     //Destructuring the values inside of book.
-    const { title, author, numberOfPages, rating, read } = book;
+    //Rating 0 will be treated as if there's no rating assigned, but later used for the book sorting by rating
+    const { title, author, numberOfPages, rating = 0, read } = book;
 
     const listItem = `
 			<div class="col s12 m6" book data-index="${index}">
@@ -39,9 +48,9 @@ class Library {
 						<hr>
 						<div class="card-footer">
 							<div>
-								<p><span>${rating}</span></p>
+              <p><strong>Rating</strong>: <span class="card-rating">${rating}</span></p>
 							</div>
-							<div>
+              <div>
 								<div class="book-read book-read-${read} btn">${readOrUnread}</div>
 							</div>
 						</div>
@@ -91,8 +100,67 @@ class Library {
         book.style.display = 'block';
       }
     }
+  };
+
+  createBook = (e) => {
+    event.preventDefault();
+
+    const title = document.querySelector("#book-title").value;
+    const name = document.querySelector("#book-name").value;
+    const number = document.querySelector("#book-number").value;
+    const read = document.querySelector("#book-read").value;
+    const rating = document.querySelector("#book-rating").value;
+  
+    const formSelectors = [title, name, number, read, rating];
+  
+    //Simple checker function to see if the fields are filled.
+    const inputFilled = currentValue => currentValue.length > 0;
+  
+    //If all of the fields are filled...
+    if (formSelectors.every(inputFilled)) {
+      //Create a new instance of the Book Class
+      const book = new Book(title, name, number, read, rating);
+  
+      //Create an index for the book
+      const bookIndex = library.bookDisplay.length;
+  
+      //Add Book to the Library Storage
+      library.bookStorage.push(book);
+  
+      //Display the Book
+      library.renderBook(book, bookIndex);
+    } else {
+      const toastHTML = " <p>Please fill in all of the form fields</p>";
+      M.toast({ html: toastHTML, classes: "centeredToast" });
+    }
+  };
+
+  sortStorage = () => {
+
+    let sortBy = this.sortLibrary.value
+
+    if( sortBy === "asc" ) {
+      this.bookStorage.sort((a, b) => a.title.localeCompare(b.title));
+    } else if( sortBy === "desc" ) {
+      this.bookStorage.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
+    //After the sorting, render the library again to see the changes
+    this.renderDisplay();
+  };
+
+  renderDisplay = () => {
+    
+    //First, empty the display
+    this.bookDisplay.innerHTML = '';
+
+    this.bookStorage.map((book) => {
+
+      this.renderBook( book )
+
+    })
   }
-}
+};
 
 //The Book class is a blueprint to create different books
 class Book {
@@ -103,42 +171,26 @@ class Book {
       (this.read = read),
       (this.rating = rating);
   }
-}
-
-const createBook = event => {
-  event.preventDefault();
-
-  const title = document.querySelector("#book-title").value;
-  const name = document.querySelector("#book-name").value;
-  const number = document.querySelector("#book-number").value;
-  const read = document.querySelector("#book-read").value;
-  const rating = document.querySelector("#book-rating").value;
-
-  const formSelectors = [title, name, number, read, rating];
-
-  //Simple checker function to see if the fields are filled.
-  const inputFilled = currentValue => currentValue.length > 0;
-
-  //If all of the fields are filled...
-  if (formSelectors.every(inputFilled)) {
-    //Create a new instance of the Book Class
-    const book = new Book(title, name, number, read, rating);
-
-    //Create an index for the book
-    const bookIndex = library.bookDisplay.length;
-
-    //Add Book to the Library Storage
-    library.bookStorage.push(book);
-
-    //Display the Book
-    library.renderDisplay(book, bookIndex);
-  } else {
-    const toastHTML = " <p>Please fill in all of the form fields</p>";
-    M.toast({ html: toastHTML, classes: "centeredToast" });
-  }
 };
-// const book = new Book(title, name, number, read, rating);
 
-document.querySelector(".book-submit").addEventListener("click", createBook);
+const library = new Library( [], document.querySelector(".display .row"), document.querySelector('#book_search'), document.querySelector(".book-submit"), document.querySelector("#book-sort") );
 
-const library = new Library( [], document.querySelector(".display .row"), document.querySelector('#book_search') );
+//Add two hardcoded books to the library so that the user does not need to ad books to test the App
+const book1 = new Book(
+  "Sapiens",
+  "Yuval Noah Harari",
+  "571",
+  "Yes",
+  "5"
+)
+
+const book2 = new Book(
+  "Code",
+  "Charles Petzold",
+  "400",
+  "No",
+  ""
+)
+
+library.bookStorage = [book1, book2];
+

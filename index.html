@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="input-field col m6 s12">
-                        <input type="number" id="book-number" required="required" class="validate">
+                        <input type="number" id="book-number" class="validate">
                         <label for="book-number">Number of pages</label>
                     </div>
 
@@ -46,7 +46,7 @@
 
                 <div class="row">
                     <div class="input-field col m6 s12">
-                        <select name="book-rating" id="book-rating" required="required">
+                        <select name="book-rating" id="book-rating">
                             <option selected disabled hidden>Select Rating</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -87,20 +87,40 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 book book-number-${index}">
+                    <div class="col s12 m6 book book-number-1">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <i class="small material-icons card-close">close</i>
-                                <span class="card-title">El Lobo Estepario</span>
-                                <p><strong>Author</strong>: ${book.author}</p>
-                                <p><strong>Pages</strong>: ${book.numberOfPages}</p>
+                                <span class="card-title">Sapiens</span>
+                                <p><strong>Author</strong>: Yuval Noah Harari</p>
+                                <p><strong>Pages</strong>: 571</p>
                                 <hr>
                                 <div class="card-footer">
                                     <div>
-                                        <p><span>${book.rating}</span></p>
+                                        <p><strong>Rating</strong>: <span class="card-rating">5</span></p>
                                     </div>
                                     <div>
-                                        <div class="book-read book-read-${book.read} btn">${readOrUnread}</div>
+                                        <div class="book-read book-read-Yes btn">Read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6 book book-number-1">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <i class="small material-icons card-close">close</i>
+                                <span class="card-title">Code</span>
+                                <p><strong>Author</strong>: Charles Petzold</p>
+                                <p><strong>Pages</strong>: 400</p>
+                                <hr>
+                                <div class="card-footer">
+                                    <div>
+                                        <!--<p><strong>Rating</strong>: <span class="card-rating">5</span></p>-->
+                                    </div>
+                                    <div>
+                                        <div class="book-read book-read-No btn">Unread</div>
                                     </div>
                                 </div>
                             </div>
