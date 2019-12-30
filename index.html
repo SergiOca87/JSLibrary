@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -16,26 +16,26 @@
            
         </div>
         <div class="row">
-            <form class="col offset-s2 s8 offset-s2">
+            <form class="col offset-m1 m10 offset-m1 s12">
                 <div class="row">
-                    <div class="input-field col m6 s12">
-                        <input type="text" id="book-title"  required="required" class="validate">
+                    <div class="input-field col m12 l6 s12">
+                        <input type="text" id="book-title" required="required">
                         <label for="book-title">Title</label>
                     </div>
                 
-                    <div class="input-field col m6 s12">
-                        <input type="text" id="book-name" required="required" class="validate">
+                    <div class="input-field col m12 l6 s12">
+                        <input type="text" id="book-name" required="required">
                         <label for="book-name">Author</label>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="input-field col m6 s12">
-                        <input type="number" id="book-number" class="validate">
+                    <div class="input-field col m12 l6 s12">
+                        <input type="number" id="book-number">
                         <label for="book-number">Number of pages</label>
                     </div>
 
-                    <div class="input-field col m6 s12">
+                    <div class="input-field col m12 l6 s12">
                         <select name="book-read" id="book-read" required="required">
                             <option value="" selected disabled hidden>Read?</option>
                             <option>Yes</option>
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col m6 s12">
+                    <div class="input-field col m12 l6 s12">
                         <select name="book-rating" id="book-rating">
                             <option selected disabled hidden>Select Rating</option>
                             <option value="1">1</option>
@@ -56,7 +56,7 @@
                         </select>
                     </div>
 
-                    <div class="input-field col m6 s12 book-submit-wrap">
+                    <div class="input-field col m12 l6 s12 book-submit-wrap">
                         <a class="book-submit waves-effect waves-light btn">Add Book</a>
                     </div>
 
@@ -80,14 +80,14 @@
                     <div>
                         <select name="book-sort" id="book-sort">
                             <option selected disabled hidden>Sort By...</option>
-                            <option value="rating">Rating</option>
+                            <!-- <option value="rating">Rating</option> -->
                             <option value="asc">Name A-Z</option>
                             <option value="desc">Name Z-A</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 m6 book book-number-1">
+                    <div class="col l6 m12 s12 book book-number-1">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <i class="small material-icons card-close">close</i>
@@ -96,18 +96,24 @@
                                 <p><strong>Pages</strong>: 571</p>
                                 <hr>
                                 <div class="card-footer">
-                                    <div>
-                                        <p><strong>Rating</strong>: <span class="card-rating">5</span></p>
-                                    </div>
-                                    <div>
+                                    <span>Rating:</span>
+                                    <div class="card-footer-flex">
+                                        <div class="card-rating">
+                                            <i class="small material-icons">star</i>
+                                            <i class="small material-icons">star</i>
+                                            <i class="small material-icons">star</i>
+                                            <i class="small material-icons">star</i>
+                                            <i class="small material-icons">star</i>
+                                        </div>
                                         <div class="book-read book-read-Yes btn">Read</div>
                                     </div>
+                                  
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col s12 m6 book book-number-1">
+                    <div class="col l6 m12 s12 book book-number-1">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <i class="small material-icons card-close">close</i>
@@ -116,12 +122,14 @@
                                 <p><strong>Pages</strong>: 400</p>
                                 <hr>
                                 <div class="card-footer">
-                                    <div>
-                                        <!--<p><strong>Rating</strong>: <span class="card-rating">5</span></p>-->
-                                    </div>
-                                    <div>
+                                    <span>Rating:</span>
+                                    <div class="card-footer-flex">
+                                        <div class="card-rating">
+                                            Not Rated
+                                        </div>
                                         <div class="book-read book-read-No btn">Unread</div>
                                     </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -131,7 +139,7 @@
       
     </div>
 
-    <script defer src="js/materialize.min.js"></script>
-    <script defer src="js/script.js"></script>
+    <script src="js/materialize.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

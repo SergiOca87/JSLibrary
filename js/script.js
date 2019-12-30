@@ -37,8 +37,20 @@ class Library {
     //Rating 0 will be treated as if there's no rating assigned, but later used for the book sorting by rating
     const { title, author, numberOfPages, rating = 0, read } = book;
 
+    const createRatingStars = () => {
+      let starsString = '';
+      if( rating > 0 ) {
+        for(let i = 0; i < rating; i++) {
+          starsString += `<i class="small material-icons">star</i>`
+        }
+      } else {
+        starsString = 'Not Rated';
+      }
+      return starsString;
+    };
+
     const listItem = `
-			<div class="col s12 m6" book data-index="${index}">
+			<div class="col l6 m12 s12 book" data-index="${index}">
 				<div class="card blue-grey darken-1">
 					<div class="card-content white-text">
 						<i class="small material-icons card-close">close</i>
@@ -47,16 +59,17 @@ class Library {
 						<p><strong>Pages</strong>: ${numberOfPages}</p>
 						<hr>
 						<div class="card-footer">
-							<div>
-              <p><strong>Rating</strong>: <span class="card-rating">${rating}</span></p>
-							</div>
-              <div>
-								<div class="book-read book-read-${read} btn">${readOrUnread}</div>
-							</div>
-						</div>
+              <span>Rating:</span>
+              <div class="card-footer-flex">
+                  <div class="card-rating">
+                  ${createRatingStars()}
+                  </div>
+                  <div class="book-read book-read-${read} btn">${readOrUnread}</div>
+              </div>
+            </div>
 					</div>
 				</div>
-			</div>
+      </div>
 		`;
 
     this.bookDisplay.insertAdjacentHTML("beforeend", listItem);
@@ -92,6 +105,8 @@ class Library {
 
     //Create a DOM collection of Books:
     const bookCollection = document.querySelectorAll('.book');
+
+    console.log(bookCollection)
     
     for (const book of bookCollection) {
       if( !book.querySelector('.card-title').textContent.toLowerCase().includes( searchValue.toLowerCase() ) ) {
@@ -111,7 +126,7 @@ class Library {
     const read = document.querySelector("#book-read").value;
     const rating = document.querySelector("#book-rating").value;
   
-    const formSelectors = [title, name, number, read, rating];
+    const formSelectors = [title, name, read];
   
     //Simple checker function to see if the fields are filled.
     const inputFilled = currentValue => currentValue.length > 0;
@@ -144,6 +159,9 @@ class Library {
     } else if( sortBy === "desc" ) {
       this.bookStorage.sort((a, b) => b.title.localeCompare(a.title));
     }
+    // } else if( sortBy === "rating" ) {
+    //   this.bookStorage.sort((a, b) => b.title.localeCompare(a.title));
+    // }
 
     //After the sorting, render the library again to see the changes
     this.renderDisplay();
@@ -154,10 +172,9 @@ class Library {
     //First, empty the display
     this.bookDisplay.innerHTML = '';
 
+    //Render the Storage
     this.bookStorage.map((book) => {
-
       this.renderBook( book )
-
     })
   }
 };
@@ -173,7 +190,16 @@ class Book {
   }
 };
 
-const library = new Library( [], document.querySelector(".display .row"), document.querySelector('#book_search'), document.querySelector(".book-submit"), document.querySelector("#book-sort") );
+//DOM selectors and empty Array to initiate the Library
+const libraryComponents = [
+  [],
+  document.querySelector(".display .row"),
+  document.querySelector('#book_search'),
+  document.querySelector(".book-submit"),
+  document.querySelector("#book-sort")
+]
+
+const library = new Library( ...libraryComponents );
 
 //Add two hardcoded books to the library so that the user does not need to ad books to test the App
 const book1 = new Book(

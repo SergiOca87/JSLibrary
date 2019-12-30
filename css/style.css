@@ -4940,10 +4940,14 @@ body {
   text-align: center;
   color: #26a69a; }
 
+.container {
+  max-width: 900px; }
+
 form {
   padding: 2rem !important;
   background-color: #f5f2e8;
-  transition: box-shadow 500ms; }
+  transition: box-shadow 500ms;
+  margin-bottom: 2rem; }
   form:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); }
   form .row:last-of-type {
@@ -4970,10 +4974,10 @@ label {
   min-height: 340px; }
 
 .card hr {
-  margin-top: 1.5rem; }
+  margin: 1.5rem 0 1.5rem 0; }
 
-.card-footer {
-  height: 5rem;
+.card-footer-flex {
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between; }
